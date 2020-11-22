@@ -30,3 +30,5 @@ RUN apt-get update \
   && pip3 install --upgrade pip
 RUN pip install awscli
 
+COPY ./R-Code /R-code
+CMD ["Rscript", "/R-code/Main.R"]
