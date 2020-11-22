@@ -1,0 +1,18 @@
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
+
+--==MYBOUNDARY==
+Content-Type: text/cloud-config; charset="us-ascii"
+
+packages:
+- amazon-efs-utils
+
+runcmd:
+- file_system_id_01={efs_id_from_your_efs_console}
+- efs_directory=/mnt/efs
+
+- mkdir -p ${efs_directory}
+- echo "${file_system_id_01}:/ ${efs_directory} efs tls,_netdev" >> /etc/fstab
+- mount -a -t efs defaults
+
+--==MYBOUNDARY==--
